@@ -40,3 +40,22 @@ def inference(img) :
     
     else :
         return 1
+    
+    
+# 머신 러닝 모델
+def machine_inference(part):
+    # 파일로 저장된 머신러닝 모델 활용
+    exercise_weight = joblib.load('models/exercise_weight.pkl')
+    sorted_ind = exercise_weight.argsort()[:, ::-1]     # 빈도수가 가장 높은 순으로 내림차순 정렬
+    
+    # db에 저장된 csv 내용 가져오기
+    df = pd.read_sql_table('exercise_exercise', 'sqlite:///db.sqlite3', index_col='id')
+    pd.set_option('display.max_colwidth', None)
+    print(df.head())
+
+    name_title = df[df['ex_part'] == part]
+    name_index = name_title.index.values
+    index = sorted_ind[name_index]
+    index = index.reshape(-1)
+    
+    return df.iloc[index][:6]

@@ -27,3 +27,14 @@ class ImgModel(models.Model) :
     
     def __str__(self):
         return f'file_name : {self.img_name}'
+    
+class Exercise(models.Model):
+    # 운동 데이터 저장 모델
+    ex_name = models.CharField(max_length=100, blank=True)
+    ex_part = models.CharField(max_length=50, blank=True)
+    ex_method = models.TextField()
+    ex_video1 = models.TextField()
+    ex_video2 = models.TextField()
+    
+    def __str__(self):
+        return f"name:{self.ex_name}, part:{self.ex_part}"
