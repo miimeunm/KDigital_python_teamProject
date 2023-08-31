@@ -45,6 +45,9 @@ def inference(img) :
 # 머신 러닝 모델
 def machine_inference(part):
     # 파일로 저장된 머신러닝 모델 활용
+    
+    # 모델 돌아갈때 오류 나면
+    # pip install sqlalchemy 확인!
     exercise_weight = joblib.load('models/exercise_weight.pkl')
     sorted_ind = exercise_weight.argsort()[:, ::-1]     # 빈도수가 가장 높은 순으로 내림차순 정렬
     

@@ -86,3 +86,15 @@ def result(request) :
     }
     
     return render(request, 'exercise/result.html', context)
+
+# 추천 운동 상세 설명 페이지
+def detail(request, id):
+    ex_detail = Exercise.objects.get(id=id)
+    ex_text = ex_detail.ex_method.replace('. ', '.<br>')
+    
+    context = {
+        'ex_detail' : ex_detail,
+        'ex_text' : ex_text,
+    }
+
+    return render(request, 'exercise/detail.html', context)

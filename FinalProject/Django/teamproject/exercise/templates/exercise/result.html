@@ -20,8 +20,7 @@
     <h3>관련 부위 추천 운동 ^^!</h3>
     {% for data in zip_data %}
     {% with name=data.0 index=data.1 %}
-        {% comment %} <li><a href="{% url 'exercise:detail' index %}">{{ name }}</a></li> {% endcomment %}
-        <li><a href="#">{{ name }}</a></li>
+        <li><a href="{% url 'exercise:detail' index %}">{{ name }}</a></li>
         <br>
     {% endwith %}
     {% endfor %} 
