@@ -20,17 +20,22 @@ def upload(request) :
             
             rs_data = inference.inference(img_url)      # 딥 러닝 예측 모델 돌려서 반환 후 rs_data에 저장
             
-            result = ImgModel()     # 예측 모델 이미지 저장하기 위해 모델 생성
-            # 예측 된 값(rs_data)를 이미지 모델에 저장 (파일 이름, 예측 라벨링 포함된 이미지, 기구 클래스, 기구 이름, 예측 퍼센트)
-            result.img_name = 'infer_' + str(form.cleaned_data['file'])
-            result.img_data = rs_data['img_data']
-            result.ex_class = rs_data['ex_class']
-            result.ex_name = rs_data['ex_name']
-            result.ex_per = rs_data['ex_per']
-            
-            result.save()       # 모델 저장
-            
-            return redirect(reverse('exercise:result'))
+            if rs_data == 1:
+                form = UploadFileForm()
+                return render(request, 'exercise/upload.html', {'form' : form, 'alert_message': '운동 사진 업로드 바람'})
+
+            else:
+                result = ImgModel()    # 예측 모델 이미지 저장하기 위해 모델 생성
+                # 예측 된 값(rs_data)를 이미지 모델에 저장 (파일 이름, 예측 라벨링 포함된 이미지, 기구 클래스, 기구 이름, 예측 퍼센트)
+                result.img_data = rs_data['img_data']
+                result.ex_class = rs_data['ex_class']
+                result.ex_name = rs_data['ex_name']
+                result.ex_per = rs_data['ex_per']
+
+                result.save() # 모델 저장
+
+                return redirect(reverse('exercise:result'))
+
     else :
         form = UploadFileForm()
         
@@ -75,6 +80,8 @@ def result(request) :
     index_predict = list(mac_predict.index)
     zip_data = zip(name_predict, index_predict)
     
+    ex_video1 = predict_result.ex_video1
+
     context = {
         'img_data' : img_data,
         'ex_class' : ex_class,
@@ -83,6 +90,7 @@ def result(request) :
         'predict_result' : predict_result,
         'zip_data' : zip_data,
         'pre_text' : pre_text,
+        'ex_video1' : ex_video1,
     }
     
     return render(request, 'exercise/result.html', context)
@@ -91,8 +99,10 @@ def result(request) :
 def detail(request, id):
     ex_detail = Exercise.objects.get(id=id)
     ex_text = ex_detail.ex_method.replace('. ', '.<br>')
-    
+    ex_video1 = ex_detail.ex_video1
+
     context = {
+        'ex_video1' : ex_video1,
         'ex_detail' : ex_detail,
         'ex_text' : ex_text,
     }
