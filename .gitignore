@@ -1,1 +1,7 @@
 __pycache__/
+video/
+*.mp4
+*.zip
+*.7z
+*.exe
+*.text
