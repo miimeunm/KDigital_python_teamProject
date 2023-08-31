@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>운동 너도 할 수 있어!</title>
+</head>
+<body>
+    <form method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <img id="preview" style="max-width: 640px; max-height: 640px;">
+        <button type="submit">알아보기</button>
+    </form>
+    
+</body>
+<script>
+    const imageInput = document.getElementById('id_file');
+    const previewImage = document.getElementById('preview');
+
+    imageInput.addEventListener('change', function () {
+        /* console.log('콘솔 로그 확인') */
+        const file = imageInput.files[0];
+        if (file) {
+            const reader = new FileReader();
+            reader.onload = function (e) {
+            previewImage.src = e.target.result;
+            previewImage.style.display = 'block';
+            };
+            reader.readAsDataURL(file);
+        }
+    });
+</script>
+</html>
