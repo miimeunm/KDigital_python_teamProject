@@ -80,8 +80,6 @@ def result(request) :
     index_predict = list(mac_predict.index)
     zip_data = zip(name_predict, index_predict)
     
-    ex_video1 = predict_result.ex_video1
-
     context = {
         'img_data' : img_data,
         'ex_class' : ex_class,
@@ -90,7 +88,6 @@ def result(request) :
         'predict_result' : predict_result,
         'zip_data' : zip_data,
         'pre_text' : pre_text,
-        'ex_video1' : ex_video1,
     }
     
     return render(request, 'exercise/result.html', context)
@@ -98,10 +95,12 @@ def result(request) :
 # 추천 운동 상세 설명 페이지
 def detail(request, id):
     ex_detail = Exercise.objects.get(id=id)
+    ex_name = ex_detail.ex_name
     ex_text = ex_detail.ex_method.replace('. ', '.<br>')
     ex_video1 = ex_detail.ex_video1
 
     context = {
+        'ex_name' : ex_name,
         'ex_video1' : ex_video1,
         'ex_detail' : ex_detail,
         'ex_text' : ex_text,

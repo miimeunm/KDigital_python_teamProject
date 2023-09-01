@@ -10,7 +10,7 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR&display=swap" rel="stylesheet">    
     <script src="https://kit.fontawesome.com/a04006c297.js" crossorigin="anonymous"></script>    
-    <title>운동 너도 할 수 있어!</title>
+    <title>운동, 너도 할 수 있어!</title>
 
     <style>
         body {
@@ -24,11 +24,12 @@
         }
 
         .h1-b {
-            height: 45px;
-            width: 300px;
+            text-align: center;
+            height: 40px;
+            width: 200px;
             background-color: lightgray;
-            margin-left: 500px;
-            margin-top: 40px; /* h1 제목 설정2 */
+            margin-left: 300px;
+            margin-top: 50px; /* h1 제목 설정2 */
         } 
 
         .btn-container {
@@ -36,30 +37,30 @@
         }
 
         .fixed-btn {
-            margin-right: 940px;
+            margin-right: 920px;
             position: absolute;
             right: 0;
-            width: 200px;
-            height: 75px; 
+            width: 180px;
+            height: 55px; 
             padding: 5px 10px;
             background-color: #007bff;
             color: #fff;
             border: none;
-            border-radius: 4px;
+            border-radius: 10px;
             cursor: pointer; /* 버튼 설정 및 메인화면 버튼 위치설정 */
         }
 
         .fixed-btn2 {
-            margin-right: 720px;
+            margin-right: 730px;
             position: absolute;
             right: 0;
-            width: 200px;
-            height: 75px; 
+            width: 180px;
+            height: 55px; 
             padding: 5px 10px;
             background-color: #007bff;
             color: #fff;
             border: none;
-            border-radius: 4px;
+            border-radius: 10px;
             cursor: pointer; /* 버튼 설정 및 이전화면 버튼 위치설정 */
         }
 
@@ -78,8 +79,9 @@
         
 
         .ex-info {
+            margin-right: 20px;
             margin-top: 50px;
-            width: 1150px;
+            width: 1500px;
             text-align: center;
             overflow-y: auto; /* 상단 결과화면 위치설정 */
             display: flex;
@@ -110,7 +112,8 @@
         }
         
         .video-margin {
-            margin-left: 70px; /* 비디오 위치 설정 */
+            margin-left: 20px; /* 비디오 위치 설정 */
+            margin-bottom: 10px;
         }
 
         .img-margin {
@@ -160,11 +163,23 @@
         </div>
     </nav><br>
 
+    <div>
+        <h1 class="h1-a">추천 운동 : {{ ex_name }}</h1>
+    </div><hr class="hr-top">
+
     <div class="result-container">
+        <section>
+            <h3 class="h1-b">운동 영상</h3>
+            <div align="center">
+                <video class='video-margin' width="600" height="400" controls>
+                    <source src="{% static 'exercise/video/'|add:ex_video1 %}" type="video/mp4"></source>
+                </video>
+                <iframe class='video-margin' width="600" height="400" src="{{ ex_detail.ex_video2 }}" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+            </div>
+        </section>
+
         <div class="ex-info">
-            <div>
-                <h1 align="center">관련운동 추가 추천</h1>
-                <hr class="hr-top">
+            <div><br><br>
                 <h3 class="vtc-line">기구 이름</h3>
                 <h4>{{ ex_detail.ex_name }}</h4>
                 <hr class="hr-top">
@@ -175,18 +190,7 @@
                 <h5>{{ ex_text|safe }}</h5>
             </div>
         </div>
-
-        <div class="video-container">
-            <div class="video-flex-container">
-                <h1 align="center">추천 운동영상</h1>
-                {% load static %}
-                <video class='recmd_margin' width="600" height="400" controls>
-                    <source src="{% static 'exercise/video/'|add:ex_video1 %}" type="video/mp4"></source>
-                </video>
-                <iframe class='video-margin' width="600" height="400" src="{{ ex_detail.ex_video2 }}" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
-            </div>
-        </div>
-    </div>
+    </div><br><br>
 
     <div class="btn-container">
         <button type="button" class="fixed-btn2" onclick="movetobackpage()">이전 화면으로 이동</button>

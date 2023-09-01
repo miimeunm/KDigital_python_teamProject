@@ -10,7 +10,7 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR&display=swap" rel="stylesheet">    
     <script src="https://kit.fontawesome.com/a04006c297.js" crossorigin="anonymous"></script>
-    <title>운동 너도 할 수 있어!</title>
+    <title>운동, 너도 할 수 있어!</title>
 
     <style>
         body {
@@ -43,8 +43,8 @@
         .fixed-btn {
             margin-left: 850px;
             position: absolute;
-            width: 200px;
-            height: 75px; 
+            width: 180px;
+            height: 50px; 
             padding: 5px 10px;
             background-color: #007bff;
             color: #fff;
@@ -67,8 +67,8 @@
             display: flex;
          } /* 결과화면 정보 이미지 옆 세팅 */
         
-
         .ex-info {
+            margin-right: 20px;
             margin-top: 50px;
             width: 1500px;
             text-align: center;
@@ -106,12 +106,9 @@
         }
 
         .img-margin {
-            margin-left: 100px;
+            margin-left: 30px;
         }
 
-        .bg-custom-color {
-            background-color: red;
-        }
     </style>
 </head>
 
@@ -134,24 +131,24 @@
     </nav><br>
 
     <div>
-        <h1 class="h1-a">예측 결과 : [ {{ predict_result.ex_name }} ]</h1>
+        <h1 class="h1-a">예측 결과 : {{ predict_result.ex_name }}</h1>
     </div><hr class="hr-top">
 
     <div class="result-container"> <!-- result 상단 메인화면 설정 -->
         <section class="p-5">
-            <div>
-                <p align="center">사진</p>
+            <div class="img-margin">
+                <p align="center"><br></p>
                 <img src="data:image/jpeg;base64, {{img_data}}" class='img'>
-                    <div class="row justify-content-center">
-                        <div class="col-lg-20 col-sm-20 text-secondary"><br>
-                            <h4 align="center">예측 결과값</h4>
-                            <div class="progress bg-secondary" style="height: 30px;">
-                                <div class="progress-bar bg-custom-color" style="width: {{ ex_per }}%; text-align: center;"> <!-- 오류가 나도 정상 적용 -->
-                                    {{ ex_per }}%
-                                </div>
-                            </div>
+            </div>
+            <div class="row justify-content-center" style="margin-left:70px">
+                <div class="col-lg-20 col-sm-20 text-secondary"><br>
+                    <h4 align="center">예측 정확도</h4>
+                    <div class="progress bg-secondary" style="height: 25px;">
+                        <div class="progress-bar bg-danger" style="width: {{ ex_per }}%">
+                            {{ ex_per }}%
                         </div>
                     </div>
+                </div>
             </div>
         </section>
 
@@ -170,21 +167,23 @@
         </div>    
     </div><hr>
 
-    <h2 style="text-align: center;" class="h1-b">추천 운동영상</h2> <!-- 추천 영상 설정 및 추가 운동추천 설정 -->
+    <h2 style="text-align: center;" class="h1-b">운동 영상</h2> <!-- 추천 영상 설정 및 추가 운동추천 설정 -->
     <div class="result-container">
         {% load static %}
         <video class="video-margin" width="600" height="400" controls>
-            <source src="{% static 'exercise/video/'|add:ex_video1 %}" type="video/mp4"></source>
+            <source src="{% static 'exercise/video/'|add:predict_result.ex_video1 %}" type="video/mp4"></source>
         </video>
         <iframe class='video-margin' width="600" height="400" src="{{ predict_result.ex_video2 }}" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
         <div class="ex-info2">
-            <h2 style="text-align: center;" class="vtc-line2">추가 운동추천 및 설명</h2>
+            <h2 style="text-align: center;" class="vtc-line2">추천 운동</h2>
 
             <table class="table table-hover" style="text-align: center;">
                 <tbody>
                     {% for data in zip_data %}
                     {% with name=data.0 index=data.1 %}
-                        <tr class="table-warning"><td><a href='{% url 'exercise:detail' index %}' style="text-decoration-line: none;">{{name}}</a></td></tr>
+                        <tr class="table-warning">
+                            <td><a href='{% url 'exercise:detail' index %}' style="text-decoration-line: none;">{{name}}</a></td>
+                        </tr>
                     {% endwith %}
                     {% endfor %}
                 </tbody>
