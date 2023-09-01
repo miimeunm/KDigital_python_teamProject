@@ -18,7 +18,7 @@ def inference(img) :
         ex_per = rs[0][4]       # 예측 퍼센트
         ex_class = rs[0][5]     # 클래스 index
         ex_name = rs[0][6]      # 기구 이름(영문)
-         
+        
         result.ims
         result.render()
         
