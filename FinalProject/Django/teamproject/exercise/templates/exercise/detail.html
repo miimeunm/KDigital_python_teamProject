@@ -214,13 +214,16 @@
                 <h5>{{ ex_text|safe }}</h5>
             </div>
         </div>
-    </div><br><br>
+    </div><br>
 
     <div class="btn-container">
         <button type="button" class="fixed-btn2" onclick="movetobackpage()">이전 화면으로 이동</button>
         <button type="button" class="fixed-btn" onclick="movemaintopage()">메인 화면으로 이동</button>
-    </div><br><br><br><hr class="hr-top">
+    </div><br><br><br>
 
+    <nav style="padding: 8px; bottom: 0; left: 0;" class="navbar navbar-expand-md navbar-light bg-dark">
+        　
+    </nav>
 
     <script>
         const myModal = document.getElementById('myModal')
@@ -241,6 +244,12 @@
         function movetomainpage(url) {
             window.location.href = "{% url 'exercise:upload' %}"
         }
+
+        window.addEventListener('scroll', function() {
+        var navbar = document.querySelector('.navbar');
+        var scrollPosition = window.scrollY;
+        });
+
     </script>
 
 </body>

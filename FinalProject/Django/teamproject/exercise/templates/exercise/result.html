@@ -8,6 +8,7 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="stylesheet" href="styles.css">
     <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR&display=swap" rel="stylesheet">    
     <script src="https://kit.fontawesome.com/a04006c297.js" crossorigin="anonymous"></script>
     <title>운동, 너도 할 수 있어!</title>
@@ -206,7 +207,7 @@
                     {% for data in zip_data %}
                     {% with name=data.0 index=data.1 %}
                         <tr class="table-warning">
-                            <td><a href='{% url 'exercise:detail' index %}' style="text-decoration-line: none;">{{name}}</a></td>
+                            <td><a href="{% url 'exercise:detail' index %}" style="text-decoration-line: none;">{{name}}</a></td>
                         </tr>
                     {% endwith %}
                     {% endfor %}
@@ -217,23 +218,34 @@
 
     <div class="btn-container">
         <button type="button" class="fixed-btn" onclick="movetopage()">메인 화면으로 이동</button>
-    </div><br><br><hr class="hr-top">
+    </div><br><br><br>
 
-    <script> /* 스크립트 설정 */
-        const myModal = document.getElementById('myModal')
-        const myInput = document.getElementById('myInput')
+    <nav style="padding: 8px; bottom: 0; left: 0;" class="navbar navbar-expand-md navbar-light bg-dark">
+        　
+    </nav>
 
-        myModal.addEventListener('shown.bs.modal', () => {
-            myInput.focus()
-        })
-        function showAlert_menu4() {
-            alert('Made by. Team 소수정예\n [ 팀원 ]\n 구영인\n 진수영\n 임규찬\n 우종연')
-        }
-
-        function movetopage(url) {
-            window.location.href = "{% url 'exercise:upload' %}"
-        }
-    </script>
 </body>
+
+<script> /* 스크립트 설정 */
+    const myModal = document.getElementById('myModal')
+    const myInput = document.getElementById('myInput')
+
+    myModal.addEventListener('shown.bs.modal', () => {
+        myInput.focus()
+    })
+    function showAlert_menu4() {
+        alert('Made by. Team 소수정예\n [ 팀원 ]\n 구영인\n 진수영\n 임규찬\n 우종연')
+    }
+
+    function movetopage(url) {
+        window.location.href = "{% url 'exercise:upload' %}"
+    }
+
+    window.addEventListener('scroll', function() {
+        var navbar = document.querySelector('.navbar');
+        var scrollPosition = window.scrollY;
+    });
+</script>
+
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+jjXkk+Q2h455rYXK/7HAuoJl+0I4" crossorigin="anonymous"></script>
 </html>
