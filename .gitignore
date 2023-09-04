@@ -1,5 +1,6 @@
 __pycache__/
 video/
+*.sqlite3
 *.mp4
 *.zip
 *.7z
