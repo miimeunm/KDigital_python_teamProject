@@ -48,22 +48,22 @@
             display: block;
             margin: 20px auto;
             padding: 10px 20px;
-            background-color: #007bff;
-            color: #fff;
+            background-color: #FFD700;
+            color: black;
             border: none;
             border-radius: 10px;
             cursor: pointer; /* [ 업로드 ] 버튼 설정 */
         }
 
         .upload-button:hover {
-            background-color: #0056b3; /* [ 업로드 ] 버튼 바탕색깔 설정 */
+            background-color: orange; /* [ 업로드 ] 버튼 바탕색깔 설정 */
         } 
 
         .alert-button {
             text-align: bottom;
             padding: 5px 10px;
-            background-color: #007bff;
-            color: #fff;
+            background-color: #666666;
+            color: white;
             border: none;
             border-radius: 10px;
             cursor: pointer; /* [ 사용법 ] 버튼 설정 */
@@ -72,16 +72,19 @@
         .alert-button2 {
             text-align: bottom;
             padding: 5px 17px;
-            background-color: #007bff;
-            color: #fff;
+            background-color: #666666;
+            color: white;
             border: none;
             border-radius: 10px;
             cursor: pointer; /* [ 설명 ] 버튼 설정 */
         } 
 
-
         .alert-button:hover {
-            background-color: #0056b3; /* [ 안내창 ] 버튼 바탕색깔 설정 */
+            background-color: #999999; /* [ 안내창 ] 버튼 바탕색깔 설정 */
+        }
+        
+        .alert-button2:hover {
+            background-color: #999999; /* [ 안내창 ] 버튼 바탕색깔 설정 */
         }
 
         #preview {
@@ -132,11 +135,12 @@
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header" style="flex-direction: column-reverse;">
-                <h1 align="center" class="modal-title fs-3" id="teamModalLabel">Made by. Team 소수정예</h1>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    <h1 align="center" class="modal-title fs-3" id="teamModalLabel">Made by. Team 소수정예</h1>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
+
                 <div class="modal-body" style="text-align:center">
-                    <p style="font-size: large"><mark>　팀원　</mark></p>
+                    <p style="font-size: large"><mark style="background-color:#FFD700;">　팀원　</mark></p>
                     
                     구영인  <br>
                     진수영  <br>
@@ -166,7 +170,7 @@
         {% csrf_token %}
         {{ form.as_p }}
         <img id="preview">
-        <button style="position: absolute; bottom: 0; left: 0; margin-left: 883px; margin-bottom: 100px;" class="upload-button" type="submit">업로드</button>
+        <button style="position: absolute; bottom: 0; left: 0; margin-left: 883px; margin-bottom: 100px; background-color:warning;" class="upload-button" type="submit">업로드</button>
     </form> <!-- 파일 업로드 버튼 및 기능 설정 -->
     
     <div style="position: absolute; bottom: 0; left: 0; margin-left: 860px; margin-bottom: 60px;">
